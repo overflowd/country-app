@@ -18,8 +18,10 @@ async function onSuccess(position) {
   let lat = position.coords.latitude;
   let lng = position.coords.longitude;
 
-  const api_key = "fdcf371be11d48c9aec50fa7f7514be1";
-  const url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${api_key}`;
+  const api_key = await fetch("api_key.json");
+  const api_key_data = await api_key.json();
+
+  const url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${api_key_data.api_key}`;
 
   const response = await fetch(url);
   const data = await response.json();
